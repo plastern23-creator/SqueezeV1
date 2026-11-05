@@ -27,23 +27,20 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: SqueezeV1
 
       - name: Build web assets
         run: npm run build
-        working-directory: SqueezeV1
 
       - name: Sync Capacitor Android
         run: npx cap sync android
-        working-directory: SqueezeV1
 
       - name: Build Debug APK
         run: ./gradlew assembleDebug
-        working-directory: SqueezeV1/android
+        working-directory: android
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-debug
-          path: SqueezeV1/android/app/build/outputs/apk/debug/app-debug.apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
           
