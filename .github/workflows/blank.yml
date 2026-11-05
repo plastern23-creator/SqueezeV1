@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
-          cache: 'npm'
+          # Removed cache: 'npm' so it doesn't look for package-lock.json
 
       - name: Setup Expo
         uses: expo/expo-github-action@v8
@@ -24,8 +24,9 @@ jobs:
           expo-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install dependencies (No Lock File)
+        run: npm install --package-lock=false
 
       - name: Build Android APK
         run: eas build --platform android --profile preview --non-interactive
+        
