@@ -1,0 +1,12 @@
+{
+  "name": "squeeze-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Build complete'"
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  }
+}
