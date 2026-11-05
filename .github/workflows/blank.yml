@@ -17,20 +17,18 @@ jobs:
         with:
           node-version: 18.x
 
-      - name: Force npm and clear conflicting lock files
-        run: |
-          rm -f yarn.lock package-lock.json
-          npm install -g npm@latest
-
-      - name: Setup Expo
+      - name: Setup Expo & EAS
         uses: expo/expo-github-action@v8
         with:
           expo-version: latest
+          eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Install dependencies with clean npm
+      - name: Install dependencies
         run: npm install --legacy-peer-deps
 
-      - name: Build Android APK
-        run: eas build --platform android --profile preview --non-interactive
-        
+      - name: Build Android APK on EAS
+        run: eas build --platform android --profile preview --non-interactive --no-wait
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          
