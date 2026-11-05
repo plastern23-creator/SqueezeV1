@@ -23,9 +23,7 @@ jobs:
           expo-version: latest
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
-
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
+          packager: npm  # <--- Forces npm instead of yarn, preventing the yarn crash
 
       - name: Build Android APK on EAS
         run: eas build --platform android --profile preview --non-interactive --no-wait
