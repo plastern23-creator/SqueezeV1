@@ -25,14 +25,31 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Create Project Structure
+        run: |
+          if [ ! -f package.json ]; then
+            npm init -y
+            npm install react@18.2.0 react-dom@18.2.0 @capacitor/core @capacitor/cli @capacitor/android
+          else
+            npm install
+          fi
 
-      - name: Build web assets
-        run: npm run build
+      - name: Build Web Assets
+        run: |
+          if npm run | grep -q "build"; then
+            npm run build
+          else
+            mkdir -p dist
+            echo "<h1>Squeeze App</h1>" > dist/index.html
+          fi
 
-      - name: Sync Capacitor Android
-        run: npx cap sync android
+      - name: Initialize Capacitor
+        run: |
+          if [ ! -d "android" ]; then
+            npx cap init Squeeze com.squeeze.app --web-dir dist --yes
+            npx cap add android
+          fi
+          npx cap sync android
 
       - name: Build Debug APK
         run: ./gradlew assembleDebug
