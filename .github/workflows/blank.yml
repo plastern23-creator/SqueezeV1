@@ -31,7 +31,7 @@ jobs:
           npm install @capacitor/android
 
       - name: Build Web Assets
-        run: npm run build
+        run: npx vite build
 
       - name: Generate and Sync Fresh Android Platform
         run: |
