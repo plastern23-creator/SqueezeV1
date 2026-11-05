@@ -28,6 +28,7 @@ jobs:
       - name: Install Dependencies & Capacitor Android
         run: |
           npm install
+          npm install --save-dev vite @vitejs/plugin-react
           npm install @capacitor/android
 
       - name: Build Web Assets
