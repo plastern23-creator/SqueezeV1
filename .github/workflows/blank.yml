@@ -25,8 +25,11 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
           packager: npm
 
-      - name: Build Android APK on EAS
-        run: eas build --platform android --profile preview --non-interactive --no-wait
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Trigger EAS Build (Cloud)
+        run: eas build --platform android --profile preview --non-interactive --clear-cache
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
           
