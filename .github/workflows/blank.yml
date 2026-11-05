@@ -33,13 +33,10 @@ jobs:
       - name: Build Web Assets
         run: npm run build
 
-      - name: Add and Sync Capacitor Android
+      - name: Generate Fresh Android Platform
         run: |
-          if [ ! -d "android" ]; then
-            npx --yes @capacitor/cli add android
-          else
-            npx --yes @capacitor/cli sync android
-          fi
+          rm -rf android
+          npx --yes @capacitor/cli add android
 
       - name: Build Android Debug APK
         working-directory: ./android
